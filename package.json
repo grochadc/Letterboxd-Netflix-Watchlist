@@ -1,0 +1,29 @@
+{
+  "name": "netflixboxd",
+  "version": "1.0.0",
+  "description": "Web server that shows movies from a Letterboxd that are found in netflix.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "neflix",
+    "letterboxd",
+    "watchlist",
+    "movies"
+  ],
+  "author": "Gonzalo Rocha",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.15.4",
+    "jsonframe-cheerio": "^3.0.1",
+    "jssoup": "0.0.6",
+    "log-update": "^2.1.0",
+    "prompt": "^1.0.0",
+    "request": "^2.82.0",
+    "x-ray": "^2.3.2",
+    "yargs": "^9.0.1"
+  }
+}
