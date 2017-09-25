@@ -16,10 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.0",
-    "cheerio": "^1.0.0-rc.2",
     "express": "^4.15.4",
-    "jsonframe-cheerio": "^3.0.1",
-    "jssoup": "0.0.6",
     "log-update": "^2.1.0",
     "prompt": "^1.0.0",
     "request": "^2.82.0",
