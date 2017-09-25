@@ -35,7 +35,7 @@ app.get('/', function (req,res){
     scrapeMovies().then(
 		    movies => {
 	    if(debug) console.log('scrapeMovies() resolved');
-	    return new Promise.all(movies.map(movie => {
+	    return new Promise.all(movies.map((movie, index) => {
 		    return new Promise((resolve, reject)=> {
 			    if(debug) console.log('Requesting: ', movie.title);
 			    request('http://netflixroulette.net/api/api.php?title='+encodeURIComponent(movie.title), (err, response, body) => {
