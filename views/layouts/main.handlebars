@@ -3,15 +3,26 @@
 		<title>Letterboxd Netflix</title>
 	</head>
 	<body>
-		<div>
+		<div id="container">
+		<table>
+			<tr>
 		{{#each movies}}
+			<td class="movie_container">
 			{{#if this.found}}
 				<p><img src="{{this.poster}}" /></p>
 				<p><a href='https://netflix.com/title/{{this.show_id}}'>{{this.show_title}}</a></p>
 			{{else}}
+				<p><img src="{{this.poster}}" /></p>
 				<p>{{this.show_title}} {{this.errmsg}}</p>
 			{{/if}}
+			</td>
+			{{#nextRow @index}}
+				</tr><tr>
+			{{/nextRow}}
+			
 		{{/each}}
+			</tr>
+		</table>
 		</div>
 	</body>
 </html>
