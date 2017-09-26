@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title>Letterboxd Netflix</title>
+	</head>
+	<body>
+		<div>
+		{{#each movies}}
+			{{#if this.found}}
+				<p><img src="{{this.poster}}" /></p>
+				<p><a href='https://netflix.com/title/{{this.show_id}}'>{{this.show_title}}</a></p>
+			{{else}}
+				<p>{{this.show_title}} {{this.errmsg}}</p>
+			{{/if}}
+		{{/each}}
+		</div>
+	</body>
+</html>
