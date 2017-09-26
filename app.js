@@ -1,11 +1,19 @@
-var express = require('express');
-var app = express();
+//Set Up important modules
+var Promise  = require('bluebird');
+var request = require('request');
+var path = require('path');
 
+//Set Up x-ray for scraping
 var Xray = require('x-ray');
 var x = Xray();
 
-var Promise  = require('bluebird');
-var request = require('request');
+//Setup express server
+var express = require('express');
+var app = express();
+var exphbs = require('express-handlebars');
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 var debug = true;
 
@@ -42,15 +50,24 @@ app.get('/', function (req,res){
 					    if(debug) console.log('Flixroulette requested');
 					    var flixMovie = JSON.parse(body);
 					    if(flixMovie.errorcode != 404){
-						    resolve('Movie found: '+flixMovie.show_title, 'ID: '+flixMovie.show_id);
+						    var outMovie = (({show_title,show_id,poster})=> ({show_title, show_id, poster}))(flixMovie);
+						    outMovie.found = true;
+						    resolve(outMovie);
 					    }
 					   else{
-						    resolve('No movie found...');
+						   var missing_movie = {show_title: movie.title, found:false, errmsg: 'This movie wasn\'t found'};
+						    resolve(missing_movie);
 					    }
 			    });
 		    });
 	    }));
-    }).then((movies) => res.send(movies)).catch((err) => console.log(err));
+    }).then((movies_data) => {
+	    res.render('main', {movies: movies_data}, (err,html) =>{
+		    console.log('rendering');
+		    console.log(movies_data);
+		    res.send(html);
+	    });
+    }).catch((err) => console.log(err));
 
 });
 
