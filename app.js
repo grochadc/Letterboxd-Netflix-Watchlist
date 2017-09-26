@@ -12,17 +12,30 @@ var express = require('express');
 var app = express();
 var exphbs = require('express-handlebars');
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars',exphbs({
+	defaultLayout: 'main',
+	helpers: {
+		nextRow: function(index_count, block){
+			if(parseInt(index_count)%3 === 0){
+				return block.fn(this);
+			}
+		}
+	}
+}));
+
 app.set('view engine', 'handlebars');
 
 var debug = true;
 
-app.get('/', function (req,res){
+app.get('/list', function (req,res){
 
     if(debug) console.log('Page requested!');
 
-    var username = 'medicengonzo';
+    var username = ((req.query.user) ? req.query.user : 'medicengonzo');
     var pages = 3;
+
+    if(debug) console.log(username);
+    if(debug) console.log(req.query.user);
 
     var scrapeMovies = function(){
 	    if(debug) console.log('scrapeMovies()');
@@ -55,7 +68,7 @@ app.get('/', function (req,res){
 						    resolve(outMovie);
 					    }
 					   else{
-						   var missing_movie = {show_title: movie.title, found:false, errmsg: 'This movie wasn\'t found'};
+						   var missing_movie = {show_title: movie.title, found:false, errmsg: 'This movie wasn\'t found', poster:'https://cdn.amctheatres.com/Media/Default/Images/noposter.jpg'};
 						    resolve(missing_movie);
 					    }
 			    });
