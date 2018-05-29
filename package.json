@@ -24,5 +24,8 @@
     "request": "^2.82.0",
     "x-ray": "^2.3.2",
     "yargs": "^9.0.1"
+  },
+  "devDependencies": {
+    "left-pad": "^1.1.3"
   }
 }
